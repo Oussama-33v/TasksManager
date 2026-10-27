@@ -3,7 +3,26 @@ const descriptionBlok = document.getElementById('description')
 
 const statusBlok = document.getElementById('status')
 
-const tasks = [];
+const tasks = [
+    {
+        taskId: 12,
+        title: 'data',
+        description: "clean the data ...",
+        status: 'Done'
+    },
+    {
+        taskId: 2,
+        title: 'dev',
+        description: 'test the env',
+        status: 'In progress'
+    },
+    {
+        taskId: 22,
+        title: 'sql',
+        description: 'creat dtabase',
+        status: 'To do'
+    },
+];
 
 function titleVerify(title) {
     let titleTrimed = title.value.trim();
@@ -45,13 +64,27 @@ function generateTask(e) {
     displayTasksInfos(tasks)
 }
 
-function displayTasksInfos (tasks) {
-    const infosBlock = document.querySelector('.tasks-ifrmations')
+function displayTasksInfos(tasks) {
+    const infosBlockCountainer = document.getElementById('task-list')
     tasks.forEach(task => {
-        infosBlock.innerHTML += `
-        <h3 class="font-semibold">${task.title}</h3>
+        infosBlockCountainer.innerHTML += `
+       <li class="bg-white rounded-lg shadow p-4 flex items-start justify-between gap-4" dara-id ="${task.taskId}">
+        <div class="tasks-ifrmations">
+            <h3 class="font-semibold">${task.title}</h3>
           <p class="text-sm text-slate-600 mt-1">${task.description}.</p>
           <span class="inline-block text-xs bg-slate-200 rounded-full px-2 py-1 mt-2">${task.status}</span>
+        </div>
+        <div class="flex flex-col items-end gap-2">
+          <select class="border border-slate-300 rounded px-2 py-1 text-xs bg-white">
+            <option value="To do">To do</option>
+            <option value="In progress" selected>In progress</option>
+            <option value="Done">Done</option>
+          </select>
+          <button class="text-sm text-red-600 hover:text-red-800 font-medium">
+            Delete
+          </button>
+        </div>
+      </li>
         `
     });
 }
